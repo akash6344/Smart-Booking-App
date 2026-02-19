@@ -4,6 +4,9 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "Smart Bookmark App",
   description: "Private bookmark manager with real-time sync",
+  icons: {
+    icon: "/icon.svg",
+  },
 };
 
 export default function RootLayout({

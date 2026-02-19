@@ -1,4 +1,4 @@
-import { pgTable, uuid, text, timestamptz } from "drizzle-orm/pg-core";
+import { pgTable, uuid, text, timestamp } from "drizzle-orm/pg-core";
 
 /**
  * Bookmarks table. RLS is applied via migration so users only see their own rows.
@@ -9,7 +9,7 @@ export const bookmarks = pgTable("bookmarks", {
   userId: uuid("user_id").notNull(),
   url: text("url").notNull(),
   title: text("title").notNull(),
-  createdAt: timestamptz("created_at").notNull().defaultNow(),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
 });
 
 export type Bookmark = typeof bookmarks.$inferSelect;

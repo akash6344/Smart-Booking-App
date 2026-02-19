@@ -18,6 +18,10 @@ export function BookmarkList({ initialBookmarks }: BookmarkListProps) {
   const [deletingId, setDeletingId] = useState<string | null>(null);
 
   useEffect(() => {
+    setBookmarks(initialBookmarks);
+  }, [initialBookmarks]);
+
+  useEffect(() => {
     const supabase = createClient();
 
     const channel = supabase

@@ -2,12 +2,15 @@
 
 /**
  * Form to add a new bookmark. Submits via server action.
+ * Triggers router.refresh() after success so the list refetches and updates.
  */
 import { useTransition } from "react";
+import { useRouter } from "next/navigation";
 import { addBookmark } from "@/app/actions/bookmarks";
 
 export function AddBookmarkForm() {
   const [isPending, startTransition] = useTransition();
+  const router = useRouter();
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -17,6 +20,7 @@ export function AddBookmarkForm() {
       const result = await addBookmark(formData);
       if (!result.error) {
         form.reset();
+        router.refresh();
       } else {
         console.error(result.error);
       }
